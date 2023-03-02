@@ -50,7 +50,7 @@ export const ServiceProvider = ({children}) => {
         username:""
     }
 
-    const [user, setUser] = useState(defaltUser);
+    var [user, setUser] = useState(defaltUser);
 
     const [post, setPost] = useState(defaultpostValue);
 
@@ -84,7 +84,7 @@ export const ServiceProvider = ({children}) => {
     async function checkUser() {
         try {
             setisLoading(true)
-          const user = await Auth.currentAuthenticatedUser()
+          const user = await Auth.currentAuthenticatedUser();
           getAWSTemporaryCreds(user);
           console.log(user);
           isAdminCheck(user);
@@ -327,6 +327,47 @@ export const ServiceProvider = ({children}) => {
         setisLoading(false)
     }
 
+
+    async function updateUserAttributes(attribute){
+        setisLoading(true)
+        try {  
+            if(attribute){
+                await Auth.updateUserAttributes(user, attribute)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        setisLoading(false)
+    }
+
+    async function vrifyUserEmail(){
+        setisLoading(true)
+        try {
+                const response = await Auth.verifyCurrentUserAttribute("email");
+                console.log(response);
+        } catch (error) {
+            console.log(error) 
+        }  
+        setisLoading(false)
+    }
+
+    async function vrifyUserEmailSubmit(code){
+        setisLoading(true)
+        try {
+            if(code){
+                const response = await Auth.verifyCurrentUserAttributeSubmit("email",code);
+                console.log(response);
+                const user = await Auth.currentAuthenticatedUser({
+                    bypassCache: true 
+                });
+                setUser(user);  
+            }
+        } catch (error) {
+            console.log(error)
+        }  
+        setisLoading(false)
+    }
+
     async function signOut(){
         try {
             await Auth.signOut();
@@ -357,7 +398,11 @@ export const ServiceProvider = ({children}) => {
         deletePostById,
         updateUserProfilePicture,
         signOut,
-        setMyPostPage
+        setMyPostPage,
+        updateUserAttributes,
+        vrifyUserEmailSubmit,
+        vrifyUserEmail
+
     }}>
         {children}
     </ServiceContext.Provider>
