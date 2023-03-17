@@ -4,12 +4,12 @@ import java.util.List;
 
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.RemovalPolicy;
-import software.amazon.awscdk.services.apigateway.AuthorizationType;
-import software.amazon.awscdk.services.apigateway.Authorizer;
+//import software.amazon.awscdk.services.apigateway.AuthorizationType;
+//import software.amazon.awscdk.services.apigateway.Authorizer;
 import software.amazon.awscdk.services.apigateway.CfnAuthorizer;
 import software.amazon.awscdk.services.apigateway.CfnAuthorizerProps;
-import software.amazon.awscdk.services.apigateway.CognitoUserPoolsAuthorizer;
-import software.amazon.awscdk.services.apigateway.CognitoUserPoolsAuthorizerProps;
+//import software.amazon.awscdk.services.apigateway.CognitoUserPoolsAuthorizer;
+//import software.amazon.awscdk.services.apigateway.CognitoUserPoolsAuthorizerProps;
 import software.amazon.awscdk.services.apigateway.RestApi;
 import software.amazon.awscdk.services.cognito.AuthFlow;
 import software.amazon.awscdk.services.cognito.CfnUserPoolGroup;

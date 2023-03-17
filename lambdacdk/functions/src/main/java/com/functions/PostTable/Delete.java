@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
+//import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -19,7 +19,7 @@ public class Delete implements RequestHandler<APIGatewayProxyRequestEvent,APIGat
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
-        LambdaLogger logger = context.getLogger();
+        //LambdaLogger logger = context.getLogger();
         APIGatewayProxyResponseEvent result = new APIGatewayProxyResponseEvent();
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -27,7 +27,7 @@ public class Delete implements RequestHandler<APIGatewayProxyRequestEvent,APIGat
         headers.put("Access-Control-Allow-Methods", "*");
 
         try {
-            Gson gson = new Gson();
+            //Gson gson = new Gson();
             Map<String, String> pathParametermap = input.getPathParameters();
             String id = pathParametermap.get("id");
             DynamoDbClient ddb = DynamoDbClient.create();
