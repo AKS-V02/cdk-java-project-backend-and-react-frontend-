@@ -4,6 +4,7 @@ package com.functions.PostTable;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,10 +17,13 @@ import com.google.gson.Gson;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.BatchWriteItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemResponse;
+import software.amazon.awssdk.services.dynamodb.model.PutRequest;
 //import software.amazon.awssdk.services.dynamodb.model.PutRequest;
 import software.amazon.awssdk.services.dynamodb.model.ReturnValue;
+import software.amazon.awssdk.services.dynamodb.model.WriteRequest;
 
 
 public class Create implements RequestHandler<APIGatewayProxyRequestEvent,APIGatewayProxyResponseEvent>{
@@ -59,6 +63,13 @@ public class Create implements RequestHandler<APIGatewayProxyRequestEvent,APIGat
                     .returnValues(ReturnValue.ALL_OLD)
                     .item(item)
                     .build();
+            // BatchWriteItemRequest req = BatchWriteItemRequest.builder()
+            // .requestItems(Map.of(tableName, List.of(WriteRequest.builder()
+            //                                         .putRequest(PutRequest.builder()
+            //                                         .item(item)
+            //                                         .build())    
+            //                                         .build())))
+            // .build();
             PutItemResponse response = ddb.putItem(putItemRequest);
             logger.log("Body is:"+response);
             return result.withStatusCode(200).withBody(gson.toJson(response.attributes().get(primaryKey))).withHeaders(headers);
