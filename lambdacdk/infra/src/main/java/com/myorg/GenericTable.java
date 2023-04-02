@@ -132,11 +132,34 @@ public class GenericTable {
     private Function createSingleLambda(String lambdaName) {
         lambdaEnvMap.put("TABLE_NAME", this.tableProps.getTableName());
         lambdaEnvMap.put("PRIMARY_KEY",this.tableProps.getPartitionKey().getName());
+        
+        // require docker or Rancher dextop
+        // List<String> lambdaFunctionPackagingInstructions = Arrays.asList(
+        //     "/bin/sh",
+        //     "-c",
+        //     "cd functions " +
+        //         "&& mvn clean install " +
+        //         "&& cp /asset-input/functions/target/bmicalculator.jar /asset-output/"
+        // );
+
+        // BundlingOptions.Builder builderOptions = BundlingOptions.builder()
+        // .image(Runtime.JAVA_11.getBundlingImage())
+        // .volumes(singletonList(
+        //         DockerVolume.builder()
+        //             .hostPath(System.getProperty("user.home") + "/.m2/")
+        //             .containerPath("/root/.m2/")))  
+        // .outputType(BundlingOutput.ARCHIVED);
 
        return new Function(this.stack, this.tableProps.getTableName()+"-"+lambdaName, FunctionProps.builder()
        .functionName(this.tableProps.getTableName()+"-"+lambdaName)
        .runtime(Runtime.JAVA_11)
        .code(Code.fromAsset("../lambda_Assates/lambdaFunctions.jar"))
+    //    .code(Code.fromAsset("../", AssetOptions.builder().bundling( // require docker or Rancher dextop
+    //             builderOptions.command(
+    //                 lambdaFunctionPackagingInstructions
+    //             ).build()
+    //         ).build()
+    //         ))
        .handler("com.functions."+this.tableProps.getTableName()+"."+lambdaName)
        .environment(lambdaEnvMap)
        .memorySize(512)
