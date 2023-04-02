@@ -4,7 +4,7 @@ package com.functions.PostTable;
 
 
 import java.util.HashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,13 +17,12 @@ import com.google.gson.Gson;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.BatchWriteItemRequest;
+//import software.amazon.awssdk.services.dynamodb.model.BatchWriteItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemResponse;
-import software.amazon.awssdk.services.dynamodb.model.PutRequest;
 //import software.amazon.awssdk.services.dynamodb.model.PutRequest;
 import software.amazon.awssdk.services.dynamodb.model.ReturnValue;
-import software.amazon.awssdk.services.dynamodb.model.WriteRequest;
+//import software.amazon.awssdk.services.dynamodb.model.WriteRequest;
 
 
 public class Create implements RequestHandler<APIGatewayProxyRequestEvent,APIGatewayProxyResponseEvent>{
